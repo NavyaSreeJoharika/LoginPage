@@ -26,7 +26,7 @@ func main() {
 	mynumRating, _ := strconv.ParseFloat(strings.TrimSpace(userRating), 64)
 
 	//Back End
-	fmt.Printf("%v %v\n", name, mynumRating)
+	//.Printf("%v %v", name, mynumRating)
 	fmt.Printf("Hello %v, \n Thanks for rating our dosa center with %v star rating. \n\n Your rating was recorded in our system at %v ", name, mynumRating, time.Now().Format(time.Kitchen))
 
 	if mynumRating == 5 {
