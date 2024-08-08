@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Login Page</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <form action="/login" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="phone">Phone Number1:</label>
+                <input type="text" id="phone" name="phone" required><br><br>
+                <label for="phone">Phone Number2:</label>
+                <input type="tel" id ="phone"
+                
+                pattern="[0-9]{10}" 
+                required />
+                <br><br>
+
+
+                <div class="wrap">
+                    <button type="submit"
+                            onclick="solve()">
+                          Submit
+                    </button>
+              </div>                    
+            </form>
+        </div>
+    </body>
+    </html>
+    
+</body>
+</html>
