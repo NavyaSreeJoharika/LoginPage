@@ -18,7 +18,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Please enter your full name")
 	name, _ = reader.ReadString('\n')
-
+	name = strings.TrimSpace(name)
 	//Take rating from user and convert it to float
 	reader = bufio.NewReader(os.Stdin)
 	fmt.Println("Please rate our Dosa Center between 1 and 5 :")

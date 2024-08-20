@@ -277,6 +277,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"context"
 	"fmt"
 	"html/template"
 	"log"
@@ -322,15 +323,20 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	name := formData.Get("name")
-
+	// name := formData.Get("name")
+	// number := formData.Get("number")
+	// address := formData.Get("address")
 	// Redirect to the greeting page with the name as a query parameter
-	http.Redirect(w, r, "/greet?name="+url.QueryEscape(name), http.StatusSeeOther)
+	//http.Redirect(w, r, "/greet?name="+url.QueryEscape(name)+"&number="+url.QueryEscape(number)+"&address="+url.QueryEscape(address), http.StatusSeeOther)
+	r = r.WithContext(context.WithValue(r.Context(), "formData", formData))
+	greetHandler(w, r)
 }
 
 func greetHandler(w http.ResponseWriter, r *http.Request) {
-	name := r.URL.Query().Get("name")
-
+	formData := r.Context().Value("formData").(url.Values)
+	name := formData.Get("name")
+	number := formData.Get("number")
+	address := formData.Get("address")
 	// Load the greeting template
 	tmpl, err := template.ParseFiles("greeting.html")
 	if err != nil {
@@ -339,8 +345,9 @@ func greetHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Inject the name into the template
-	err = tmpl.Execute(w, map[string]string{"Name": name})
+	err = tmpl.Execute(w, map[string]string{"Name": name, "Number": number, "Address": address})
 	if err != nil {
 		http.Error(w, "Failed to render template", http.StatusInternalServerError)
 	}
+
 }
